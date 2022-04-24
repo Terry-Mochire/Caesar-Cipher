@@ -5,19 +5,19 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import  java.util.List;
 public class Encoding {
-    private   String plaintext = "";
+    private String userText = "";
 
     public void setPlaintext(String plaintext){
-        this.plaintext = plaintext.toUpperCase();
+        this.userText = plaintext.toUpperCase();
     }
 
     public String getPlaintext() {
-        return plaintext;
+        return userText;
     }
 
-    public Integer cipherKey;
+    private Integer cipherKey;
 
-    public String cipherText = "";
+    private String cipherText = "";
     public void  userInput(){
 
         try{
@@ -41,19 +41,23 @@ public class Encoding {
                 "A","B","C","D","E","F","G",
                 "H","I","J","K","L","M","N",
                 "O","P","Q","R","S","T","U",
-                "V","W","X","Y","Z"
+                "V","W","X","Y","Z", " "
         };
 
         List<String> myList = new ArrayList<String>(List.of(alphabets));
-        this.setPlaintext(plaintext);
-        System.out.println(this.cipherKey);
+        this.setPlaintext(userText);
 
         for (int i =0; i < this.getPlaintext().length(); i++){
             Character myLetter = this.getPlaintext().charAt(i);
-            Integer currentIndex = myList.indexOf(myLetter.toString());
-            Integer cipherKey = currentIndex + this.cipherKey;
-            String cipherLetter = myList.get(cipherKey);
-            this.cipherText = this.cipherText +  "" + cipherLetter;
+            String cipherLetter = "";
+            if ( myLetter == ' ' ) {
+                cipherLetter = " ";
+            }else {
+                Integer currentIndex = myList.indexOf(myLetter.toString());
+                Integer cipherKey = (currentIndex + this.cipherKey) % 26;
+                cipherLetter = myList.get(cipherKey);
+            }
+            this.cipherText = this.cipherText + "" + cipherLetter;
         }
         return this.cipherText;
     }

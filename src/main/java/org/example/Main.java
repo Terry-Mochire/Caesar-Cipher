@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
         encoding.userInput();
-
-        System.out.println("Your cipher text is " + encoding.cipher());
+        System.out.println("Input String: " + encoding.getPlaintext());
+        System.out.println("Encrypted String: " + encoding.cipher());
     }
 }
