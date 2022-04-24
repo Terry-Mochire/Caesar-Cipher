@@ -8,7 +8,7 @@ public class Encoding {
     private   String plaintext = "";
 
     public void setPlaintext(String plaintext){
-        this.plaintext = plaintext;
+        this.plaintext = plaintext.toUpperCase();
     }
 
     public String getPlaintext() {
@@ -17,8 +17,8 @@ public class Encoding {
 
     public Integer cipherKey;
 
+    public String cipherText = "";
     public void  userInput(){
-        String cipherText = "";
 
         try{
             System.out.print("Enter Plaintext: ");
@@ -45,9 +45,17 @@ public class Encoding {
         };
 
         List<String> myList = new ArrayList<String>(List.of(alphabets));
-
+        this.setPlaintext(plaintext);
         System.out.println(this.cipherKey);
-        return "";
+
+        for (int i =0; i < this.getPlaintext().length(); i++){
+            Character myLetter = this.getPlaintext().charAt(i);
+            Integer currentIndex = myList.indexOf(myLetter.toString());
+            Integer cipherKey = currentIndex + this.cipherKey;
+            String cipherLetter = myList.get(cipherKey);
+            this.cipherText = this.cipherText +  "" + cipherLetter;
+        }
+        return this.cipherText;
     }
 
 }
