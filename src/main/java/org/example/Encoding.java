@@ -7,8 +7,9 @@ import  java.util.List;
 public class Encoding {
     private String userText = "";
 
-    public void setPlaintext(String plaintext){
+    public String setPlaintext(String plaintext){
         this.userText = plaintext.toUpperCase();
+        return this.userText;
     }
 
     public String getPlaintext() {
